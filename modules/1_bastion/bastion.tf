@@ -240,7 +240,8 @@ resource "null_resource" "enable_repos" {
     inline = [<<EOF
 # Additional repo for installing ansible package
 if ( [[ -z "${var.rhel_subscription_username}" ]] || [[ "${var.rhel_subscription_username}" == "<subscription-id>" ]] ) && [[ -z "${var.rhel_subscription_org}" ]]; then
-  sudo yum install -y epel-release
+  #sudo yum install -y epel-release
+   dnf install ansible-core
 else
   sudo subscription-manager repos --enable ${var.ansible_repo_name}
 fi
